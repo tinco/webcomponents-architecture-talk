@@ -1,0 +1,3 @@
+<input>        &rarr;  HTMLInputElement
+<img>          &rarr;  HTMLImageElement
+<div>          &rarr;  HTMLDivElement

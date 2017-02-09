@@ -1,0 +1,5 @@
+<div class="carousel">
+  <img src="…" />
+  <img src="…" />
+  <img src="…" />
+</div>

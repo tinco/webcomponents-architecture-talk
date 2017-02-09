@@ -1,0 +1,11 @@
+var MyCarousel = React.createClass({
+  render: function () {
+    var settings = { /* options */ };
+    return (
+      <Slider {...settings}>
+        <img src="…" />
+        <img src="…" />
+      </Slider>
+    );
+  }
+});
