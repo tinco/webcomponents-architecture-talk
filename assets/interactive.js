@@ -25,25 +25,24 @@ export default class Interactive extends Component {
       color: "white",
       outline: "none",
       fontWeight: "bold",
-      fontSize: "2em"
+      fontSize: "2em",
+      width: "45%"
     };
     return (
       <div>
-      {this.state.count < 10 ?
+      {this.state.count < 5 ?
         <div>
-          <Heading size={1} caps fit textColor="tertiary">
+          <Heading caps fit textColor="white">
             Thats real cool and all
           </Heading>
-          <Heading size={5} textColor="black">
-            But what about clicking stuff {this.state.count} times
+          <Heading textSize="2em" textColor="black">
+            But what about clicking stuff?
           </Heading>
-          <button style={styles} type="button" onClick={this.handleClick}>Click Me</button>
+          <button style={styles} type="button" onClick={this.handleClick}>{this.state.count} clicks</button>
         </div> :
         <div>
-          <Heading size={1} caps textColor="tertiary">Easy there pal</Heading>
-          <Heading size={1} caps textColor="black">
-            We got it the idea!
-          </Heading>
+          <Heading caps textSize="3em" textColor="white">Easy there pal!</Heading>
+          <Heading caps textSize="3em" textColor="black">We get the idea</Heading>
         </div>
         }
       </div>

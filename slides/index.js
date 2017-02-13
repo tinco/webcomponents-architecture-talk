@@ -41,20 +41,27 @@ require("spectacle/lib/themes/default/index.css");
 
 const images = {
   party: require("../assets/party.gif"),
-  xkcd: require("../assets/xkcd.png"),
-  browsers: require("../assets/browsers.gif"),
-  how: require("../assets/how.gif"),
-  shadow: require("../assets/shadow.gif"),
-  dataflow: require("../assets/dataflow.jpg"),
   frameworks: require("../assets/frameworks.png"),
-  glory: require("../assets/glory.gif"),
-  holdOn: require("../assets/hold-on.gif")
+  xkcd: require("../assets/xkcd.png"),
+  how: require("../assets/how.gif"),
+  fire: require("../assets/fire.gif"),
+  holdOn: require("../assets/hold-on.gif"),
+  browsers: require("../assets/browsers.gif"),
+  shadow: require("../assets/shadow.gif"),
+  build: require("../assets/build.jpg"),
 };
 
 preloader(images);
 
 const theme = createTheme({
-  primary: "#ff4040"
+  primary: "#000000",
+  pink: "#FF2A69",
+  blue: "#69CFF9",
+  yellow: "#EAE800"
+},{
+  primary: "Montserrat",
+  secondary: "Permanent Marker",
+  tertiary: "Yellowtail"
 });
 
 export default class Presentation extends React.Component {
@@ -63,14 +70,14 @@ export default class Presentation extends React.Component {
       <Spectacle theme={theme}>
         <Deck progress="pacman" transitionDuration={500}>
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
-            <Heading size={1} caps lineHeight={1} textColor="primary">
-              Web Components
-            </Heading>
-            <Text textSize="1.8em" caps bold margin="50px 0px 20px" textColor="white">
-              Goffert van Gool
+            <Text textSize="2.2em" bold margin="0 0 0 0.6em" letterSpacing="-0.1em" textAlign="left" textColor="yellow" >
+              An introduction to
             </Text>
-            <Text textSize="1.8em" bold textColor="white">
-              Phusion
+            <Text fit lineHeight={1} textColor="pink" textFont="secondary">
+              WebComponents
+            </Text>
+            <Text textSize="2.1em" margin="0 2.4em 0 0" textAlign="right" textColor="blue" textFont="tertiary">
+              by Goffert van Gool
             </Text>
           </Slide>
 
@@ -81,17 +88,17 @@ export default class Presentation extends React.Component {
             <Image src={images.party.replace("/", "")} width="80%" />
           </Slide>
 
-          <Slide transition={["zoom"]} bgColor="primary" maxWidth={1200}>
+          <Slide transition={["zoom"]} bgColor="pink" maxWidth={1200}>
             <Heading size={1} fit caps lineHeight={1} margin="0 0 3rem 0" textColor="white">
               Rapid innovation
             </Heading>
             <Appear>
               <div>
                 <div style={{margin: "2rem 0 2rem", display: "flex", justifyContent: "space-between", padding: "0 1rem 0 1rem"}}>
-                  <Text textSize="1.8em" bold textColor="black" textAlign="left" display="inline-block" margin="0">
+                  <Text textSize="1.4em" bold textColor="black" textAlign="left" display="inline-block" margin="0">
                     Navigating the DOM
                   </Text>
-                  <Text textSize="1.8em" bold textColor="black" textAlign="right" display="inline-block" margin="0">
+                  <Text textSize="1.4em" bold textColor="black" textAlign="right" display="inline-block" margin="0">
                     jQuery
                   </Text>
                 </div>
@@ -100,10 +107,10 @@ export default class Presentation extends React.Component {
             <Appear>
               <div>
                 <div style={{margin: "2rem 0 2rem", display: "flex", justifyContent: "space-between", padding: "0 1rem 0 1rem"}}>
-                  <Text textSize="1.8em" bold textColor="black" textAlign="left" display="inline-block" margin="0">
+                  <Text textSize="1.4em" bold textColor="black" textAlign="left" display="inline-block" margin="0">
                     Better layout system
                   </Text>
-                  <Text textSize="1.8em" bold textColor="black" textAlign="right" display="inline-block" margin="0">
+                  <Text textSize="1.4em" bold textColor="black" textAlign="right" display="inline-block" margin="0">
                     Bootstrap
                   </Text>
                 </div>
@@ -112,10 +119,10 @@ export default class Presentation extends React.Component {
             <Appear>
               <div>
                 <div style={{margin: "2rem 0 2rem", display: "flex", justifyContent: "space-between", padding: "0 1rem 0 1rem"}}>
-                  <Text textSize="1.8em" bold textColor="black" textAlign="left" display="inline-block" margin="0">
+                  <Text textSize="1.4em" bold textColor="black" textAlign="left" display="inline-block" margin="0">
                     Code organisation
                   </Text>
-                  <Text textSize="1.8em" bold textColor="black" textAlign="right" display="inline-block" margin="0">
+                  <Text textSize="1.4em" bold textColor="black" textAlign="right" display="inline-block" margin="0">
                     Frameworks
                   </Text>
                 </div>
@@ -128,7 +135,7 @@ export default class Presentation extends React.Component {
             </div>
           </Slide>
 
-          <Slide transition={["zoom"]} bgColor="primary" maxWidth={1200}>
+          <Slide transition={["zoom"]} bgColor="pink" maxWidth={1200}>
             <Heading size={1} fit caps lineHeight={1} margin="0 0 3rem 0" textColor="white">
               The platform adapts
             </Heading>
@@ -174,8 +181,8 @@ export default class Presentation extends React.Component {
             <Image src={images.xkcd.replace("/", "")} width="100%" />
           </Slide>
 
-          <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
-            <Heading size={1} fit caps lineHeight={1.5} textColor="primary">
+          <Slide transition={["zoom"]} bgColor="black" maxWidth={1400}>
+            <Heading size={1} fit caps lineHeight={1.5} textColor="white">
               Another framework is not the answer
             </Heading>
             <Appear>
@@ -184,14 +191,14 @@ export default class Presentation extends React.Component {
               </Heading>
             </Appear>
             <Appear>
-              <Heading size={1} fit caps lineHeight={2.2} textColor="white">
-                The web lacks a mechanism to structure code
+              <Heading size={1} fit caps lineHeight={3} textColor="pink">
+                No native way to structure code
               </Heading>
             </Appear>
           </Slide>
 
           <Slide transition={["slide"]} bgColor="black" maxWidth={1200}>
-            <Heading size={1} fit caps lineHeight={1} textColor="white">
+            <Heading size={1} fit caps lineHeight={1} textColor="pink">
               &lt;HTML&gt;
             </Heading>
           </Slide>
@@ -207,8 +214,8 @@ export default class Presentation extends React.Component {
             <Heading fit caps lineHeight={1.4} textColor="white">
               you are really creating
             </Heading>
-            <Heading fit caps lineHeight={1.4} textColor="white">
-              <span style={{color:"#ff4040"}}>instances</span> of <span style={{color:"#ff4040"}}>classes</span>
+            <Heading fit lineHeight={1.4} textColor="white">
+              <span style={{color:"#69CFF9", textDecoration:"underline"}}>instances</span> of <span style={{color:"#69CFF9", textDecoration:"underline"}}>classes</span>
             </Heading>
           </Slide>
 
@@ -222,20 +229,20 @@ export default class Presentation extends React.Component {
 
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
             <Appear>
-              <Text textSize="3.2em" textColor="white" margin="0 0 2rem 0">
+              <Text textSize="3.2em" textColor="white" margin="0 0 2rem 0" textFont="helvetica">
                 ¯\_(ツ)_/¯
               </Text>
             </Appear>
-            <div style={{position: "absolute", top: "-15%", left: "55%", right: "-20%", transform: "rotate(-6deg)"}}>
+            <div style={{position: "absolute", top: "-17%", left: "55%", right: "-20%", transform: "rotate(-6deg)"}}>
               <Appear>
-                <Text textSize="2.2em" textAlign="left" textColor="white" margin="0 0 4rem 0">
-                  Looks like &lt;div&gt;
+                <Text textSize="2.4em" textAlign="left" textColor="pink" margin="0 0 4rem 0" textFont="tertiary">
+                  looks like &lt;div&gt;
                 </Text>
               </Appear>
             </div>
             <div style={{padding:"0 20%"}}>
               <CodePane
-                textSize="2.2rem"
+                textSize="2.6rem"
                 lang="html"
                 source={require("raw!../assets/divs.txt")}
               />
@@ -243,9 +250,10 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
-            <div style={{padding:"0 20%"}}>
+            <div style={{padding:"0 17%"}}>
               <CodePane
-                textSize="2.2rem"
+                background="black"
+                textSize="2.6rem"
                 lang="javascript"
                 source={require("raw!../assets/jquery.txt")}
               />
@@ -253,13 +261,21 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
-            <div style={{padding:"0 10%"}}>
+            <div>
               <CodePane
-                textSize="2.2rem"
+                backgroundColor="black"
+                textSize="2.6rem"
                 lang="javascript"
-                source={require("raw!../assets/react.txt")}
+                source={require("raw!../assets/vanilla.txt")}
               />
             </div>
+          </Slide>
+
+          <Slide transition={["slide"]} bgColor="black" maxWidth={1200}>
+            <Heading margin="0 0 .1em 0" textColor="white">
+              main.js
+            </Heading>
+            <Image src={images.fire.replace("/", "")} width="100%" />
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
@@ -280,33 +296,35 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
-            <Heading size={1} fit caps lineHeight={1.5} textColor="primary">
+            <Text size={1} fit lineHeight={1.5} textColor="pink" textFont="secondary">
               Custom Elements
-            </Heading>
+            </Text>
             <Heading size={1} fit caps lineHeight={2} textColor="white">
-              Associate a tag with a class
+              Associate a <span style={{color:"#69CFF9", textDecoration:"underline"}}>tag</span> with a <span style={{color:"#69CFF9", textDecoration:"underline"}}>class</span>
             </Heading>
           </Slide>
-
 
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
-            <Heading size={1} fit caps lineHeight={1.5} textColor="primary">
+            <Text size={1} fit lineHeight={1.5} textColor="pink" textFont="secondary">
+              Web Components
+            </Text>
+            <Heading textSize="2em" lineHeight="1.2" textAlign="right" textColor="white">
               Custom Elements
             </Heading>
-            <Heading size={1} fit caps lineHeight={2} textColor="white">
-              Associate a tag with a class
+            <Heading textSize="2em" lineHeight="1.2" textAlign="right" textColor="white">
+              Templates
+            </Heading>
+            <Heading textSize="2em" lineHeight="1.2" textAlign="right" textColor="white">
+              ShadowDOM
+            </Heading>
+            <Heading textSize="2em" lineHeight="1.2" textAlign="right" textColor="white">
+              HTML Imports
             </Heading>
           </Slide>
 
-
-
-
-
-
-
-
-
-
+          <Slide transition={["slide"]} bgColor="black" maxWidth={1200}>
+            <Image src={images.holdOn.replace("/", "")} width="100%" />
+          </Slide>
 
           <CodeSlide
             maxWidth="95vw"
@@ -316,16 +334,16 @@ export default class Presentation extends React.Component {
             lang="html"
             code={require("raw!../assets/code/1.html")}
             ranges={[
-              { loc: [0, 13], note: "Use Up and Down keys to navigate code slides"},
+              { loc: [0, 13], note: "Custom Element"},
               { loc: [0, 1], note: "Standard HTML"},
               { loc: [2, 3], note: "Use our element" },
               { loc: [4, 13], note: "That's it for the HTML, only Script left" },
-              { loc: [5, 6], note: "Start with creating a Class for our Element" },
-              { loc: [5, 10], note: "Our Class has only one Method" },
+              { loc: [5, 6], note: "Define a Class for our Element" },
+              { loc: [5, 10], note: "Our Class has only one method" },
               { loc: [6, 9], note: "connectedCallback() is called when an element is attached to the DOM" },
-              { loc: [7, 8], note: "We're just dropping some content in there" },
+              { loc: [7, 8], note: "Right now we simply set some innerHTML" },
               { loc: [11, 12], note: "Then we tell the browser about our element" },
-              { loc: [0, 13], note: "That is all" },
+              { loc: [0, 13], note: <Link textColor="white" textDecoration="underline" href="https://webcomponents.ruph.in/lessons/demo/01.html">See it in action</Link> },
             ]}></CodeSlide>
 
           <CodeSlide
@@ -336,14 +354,13 @@ export default class Presentation extends React.Component {
             lang="html"
             code={require("raw!../assets/code/2.html")}
             ranges={[
-              { loc: [0, 20], note: "Let's get rid of that innerHTML" },
-              { loc: [4, 8], note: "We define a template for our content" },
-              { loc: [11, 16], note: "Attach it in the connectedCallback" },
-              { loc: [12, 13], note: "First we find our Template" },
-              { loc: [12, 14], note: "Then we clone the content" },
-              { loc: [12, 15], note: "And finally attach that to our element" },
-              { loc: [10, 17], note: "Within our Class context `this` refers to the instance of our Element" },
-              { loc: [0, 20] },
+              { loc: [0, 18], note: "Let's get rid of that innerHTML" },
+              { loc: [2, 6], note: "We define a template for our content" },
+              { loc: [9, 14], note: "Attach it in the connectedCallback" },
+              { loc: [10, 11], note: "First we find our Template" },
+              { loc: [10, 12], note: "Then we clone the content" },
+              { loc: [10, 13], note: "And finally attach that to our element" },
+              { loc: [0, 18], note: <Link textColor="white" textDecoration="underline" href="https://webcomponents.ruph.in/lessons/demo/02.html">See it in action</Link> },
             ]}></CodeSlide>
 
           <CodeSlide
@@ -355,15 +372,15 @@ export default class Presentation extends React.Component {
             code={require("raw!../assets/code/3.html")}
             ranges={[
               { loc: [0, 16], note: "Styling is easy"},
-              { loc: [9, 14], note: "Use normal CSS" },
-              { loc: [6, 15], note: "We just use a <style> tag in our Template" },
-              { loc: [17, 29], note: "No other changes" },
-              { loc: [2, 5], note: "But it's not perfect" },
-              { loc: [0, 20] },
+              { loc: [7, 12], note: "We can use normal CSS" },
+              { loc: [4, 13], note: "We just use a <style> tag in our Template" },
+              { loc: [15, 22], note: "No other changes" },
+              { loc: [0, 3], note: "But it's not perfect" },
+              { loc: [0, 20], note: <Link textColor="white" textDecoration="underline" href="https://webcomponents.ruph.in/lessons/demo/03.html">See it in action</Link> },
             ]}></CodeSlide>
 
-          <Slide transition={["slide"]} bgColor="black">
-            <Heading size={1} caps fit textColor="primary">
+          <Slide transition={["slide"]} bgColor="black" maxWidth={1200}>
+            <Heading textSize="1.6em" caps margin="-1em 0 0 0" textColor="white">
               Shadow DOM to the rescue!
             </Heading>
             <Image src={images.shadow.replace("/", "")} width="80%" />
@@ -432,12 +449,8 @@ export default class Presentation extends React.Component {
               { loc: [20, 23], note: "You can nest selectors like normal"},
             ]}></CodeSlide>
 
-          <Slide transition={["zoom", "spin"]} bgColor="primary">
+          <Slide transition={["zoom", "spin"]} bgColor="pink" maxWidth={1200}>
             <Interactive/>
-          </Slide>
-
-          <Slide transition={["slide"]} bgColor="black">
-            <Image src={images.holdOn.replace("/", "")} width="100%" />
           </Slide>
 
           <CodeSlide
@@ -541,15 +554,6 @@ export default class Presentation extends React.Component {
               { loc: [0, 17], },
             ]}></CodeSlide>
 
-
-          <Slide transition={["spin", "slide"]} bgColor="black">
-            <Heading size={1} caps fit textColor="primary">
-              Do Dataflow like Dodson
-            </Heading>
-            <Image src={images.dataflow.replace("/", "")} width="80%" />
-          </Slide>
-
-
           <CodeSlide
             maxWidth="95vw"
             maxHeight="90vh"
@@ -574,6 +578,15 @@ export default class Presentation extends React.Component {
 
 
 
+                    <Slide transition={["slide"]} bgColor="black" maxWidth={1200}>
+                      <Heading textSize="1.6em" caps margin="-1em 0 0 0" textColor="white">
+                        You dont need a build pipeline
+                      </Heading>
+                      <Heading textSize="1.6em" caps textColor="white">
+                        if you have nothing to build
+                      </Heading>
+                      <Image src={images.build.replace("/", "")} />
+                    </Slide>
 
 
 
@@ -582,67 +595,32 @@ export default class Presentation extends React.Component {
 
 
 
-                      <Slide transition={["zoom"]} bgColor="black">
-                        <Heading size={1} caps fit textColor="primary">
-                          Some things never change
-                        </Heading>
-                        <Image src={images.browsers.replace("/", "")} width="80%" />
-                      </Slide>
-
-                      <Slide transition={["zoom", "fade"]} bgColor="black">
-                        <Heading size={1} caps lineHeight={2} textColor="primary">
-                          How elegant?
-                        </Heading>
-                        <Appear>
-                          <div>
-                            <CodePane
-                              lang="html"
-                              source={require("raw!../assets/code/1.html")}
-                              margin="20px auto"
-                            />
-                            <Text textColor="white" textSize="250%" caps lineHeight={2}>This elegant</Text>
-                          </div>
-                        </Appear>
-                      </Slide>
-
-                      <Slide transition={["slide"]} bgColor="black">
-                        <Image src={images.how.replace("/", "")} width="80%" />
-                      </Slide>
-
-                      <Slide transition={["slide"]} bgColor="black">
-                        <Heading lineHeight={1.2} textColor="primary" size={1}>
-                          ¯\_(ツ)_/¯
-                        </Heading>
-                        <Cite textSize="150%">You <Appear><span>(probably)</span></Appear> <Appear><span>(possibly)</span></Appear> <Appear><span>(maybe)</span></Appear></Cite>
-                        <Appear><Text textColor="primary" textSize="250%" caps lineHeight={2}>Lets fix that!</Text></Appear>
-                      </Slide>
+                    <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                      <Heading textSize="1.6em" margin="-1em 0 0 0" caps textColor="white">
+                        Some things never change
+                      </Heading>
+                      <Image src={images.browsers.replace("/", "")} width="80%" />
+                    </Slide>
 
 
-          <Slide transition={["slide"]} bgColor="black">
-            <Heading size={1} caps fit textColor="primary">
-              Now you have the power!
-            </Heading>
-            <Image src={images.glory.replace("/", "")} width="100%" />
-          </Slide>
 
 
-          <Slide transition={["spin", "slide"]} bgColor="primary">
-            <Heading size={1} caps fit lineHeight={1.5} textColor="secondary">
+          <Slide transition={["spin", "slide"]} bgColor="primary" maxWidth={1200}>
+            <Heading caps textSize="3em" margin="0 0 0.4em 0" textColor="pink">
               Thank you!
             </Heading>
-
-            <Heading size={1} caps textColor="tertiary">
+            <Text textSize="2.4em" margin="0 0 0.2em 0" textColor="blue" textFont="secondary">
               Goffert van Gool
-            </Heading>
-            <Heading size={1} lineHeight={1.5} caps textColor="tertiary">
-              @ruphin_
-            </Heading>
-            <Heading textSize="150%" caps lineHeight={1} textColor="secondary">
+            </Text>
+            <Text textSize="2em" caps margin="0 0 1em 0" textColor="yellow" textFont="tertiary">
+              Ruphin
+            </Text>
+            <Heading textSize="1.4em" textColor="white" margin="0 0 0.2em 0">
               Find these slides and the full course at
             </Heading>
-              <Link textSize="150%" bold caps textColor="tertiary" href="http://www.github.com/ruphin/web-component-course">
-                github.com/ruphin/web-component-course
-              </Link>
+            <Link textSize="1.4em" textColor="white" href="https://webcomponents.ruph.in">
+              webcomponents.ruph.in/
+            </Link>
           </Slide>
         </Deck>
       </Spectacle>
