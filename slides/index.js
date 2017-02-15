@@ -49,7 +49,7 @@ const images = {
 preloader(images);
 
 const theme = createTheme({
-  primary: "#000000",
+  primary: "#424242",
   pink: "#FF2A69",
   blue: "#69CFF9",
   yellow: "#EAE800"
@@ -360,43 +360,43 @@ export default class Presentation extends React.Component {
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Feature: Flashing messages
+                      Flashing messages
                     </Heading>
                   </Slide>
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Feature: loggedin user info
+                      Loggedin user info
                     </Heading>
                   </Slide>
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Feature: Logging in/out
+                      Logging in/out
                     </Heading>
                   </Slide>
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Feature: Navigation
+                      Navigation
                     </Heading>
                   </Slide>
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Feature: Flashing messages
+                      Flashing messages
                     </Heading>
                   </Slide>
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Feature: Requesting / cancelling metrics subscriptions
+                      Requesting / cancelling metrics subscriptions
                     </Heading>
                   </Slide>
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Feature: Requesting / cancelling model subscriptions
+                      Requesting / cancelling model subscriptions
                     </Heading>
                   </Slide>
 
@@ -408,9 +408,105 @@ export default class Presentation extends React.Component {
 
                   <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
                     <Heading size={1} fit caps lineHeight={1} textColor="white">
-                      Graphs Elements
+                      Chart Elements
                     </Heading>
                   </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Element wrapper around d3 for live graphs
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Requirements: pretty, live, easy to use
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      A chart base elements to which components are added
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Each component registers itself to the chart base
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Charts base combines the components into a d3 object, and feeds data
+                    </Heading>
+                  </Slide>
+
+                  <CodeSlide
+                    maxWidth="95vw"
+                    maxHeight="90vh"
+                    padding="0"
+                    transition={["slide"]}
+                    lang="html"
+                    code={require("raw!../assets/code/performance-graph.html")}
+                    ranges={[
+                      { loc: [0, 5], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Everything is wrapped in a phusion-chart-base</Text>},
+                      { loc: [1, 2], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">This element renders stacked bars</Text>},
+                      { loc: [2, 3], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">This element adds a standard legend</Text>},
+                      { loc: [3, 4], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">This element encapsulates standard domain logic</Text>},
+                    ]}></CodeSlide>
+
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                The charts base exposes all components to eachother internally
+              </Heading>
+            </Slide>
+
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                Simple to reuse, but hard to extend or modify
+              </Heading>
+            </Slide>
+
+            <CodeSlide
+              maxWidth="95vw"
+              maxHeight="90vh"
+              padding="0"
+              transition={["slide"]}
+              lang="js"
+              code={require("raw!../assets/code/stacked-bars.coffee")}
+              ranges={[
+                { loc: [0, 12], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Calculating available dimensions</Text>},
+                { loc: [13,27], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Transforming incoming data</Text>},
+                { loc: [30, 38], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Inserting bar chart svg elements</Text>},
+                { loc: [42, 45], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Registering a click handler</Text>},
+                { loc: [46, 50], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Dimensioning bar svg elements</Text>},
+              ]}></CodeSlide>
+
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                Saved some duplication, but expertise still required
+              </Heading>
+            </Slide>
+
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                The new expertise is less useful, d3 expertise more so
+              </Heading>
+            </Slide>
+
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                * short demo *
+              </Heading>
+            </Slide>
+
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                Thanks for listening!
+              </Heading>
+            </Slide>
+
         </Deck>
       </Spectacle>
     );
