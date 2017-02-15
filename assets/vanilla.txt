@@ -1,5 +1,0 @@
-Array.from(
-  document.querySelectorAll('.carousel'))
-    .forEach((element) => {
-      new Carousel(element)
-    });
