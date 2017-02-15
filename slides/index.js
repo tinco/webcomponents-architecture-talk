@@ -192,10 +192,45 @@ export default class Presentation extends React.Component {
 
           <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
             <Heading size={1} fit caps lineHeight={1} textColor="white">
-              We quickly rewrote our Angular prototype to Polymer
+              First thing everyone does: A router
             </Heading>
           </Slide>
 
+          <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+            <Heading size={1} fit caps lineHeight={1} textColor="white">
+              First thing everyone does: A router
+            </Heading>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+            <Heading size={1} fit caps lineHeight={1} textColor="white">
+              Nested routes
+            </Heading>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+            <Heading size={1} fit caps lineHeight={1} textColor="white">
+              Routes with many parameters
+            </Heading>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+            <Heading size={1} fit caps lineHeight={1} textColor="white">
+              Routes with logic (such as preloading, caches, authentication )
+            </Heading>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+            <Heading size={1} fit caps lineHeight={1} textColor="white">
+              Building a router from scratch cost more time than expected (bugs)
+            </Heading>
+          </Slide>
+
+          <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+            <Heading size={1} fit caps lineHeight={1} textColor="white">
+              Eventually we settled down on a design, it works like this:
+            </Heading>
+          </Slide>
 
           <CodeSlide
             maxWidth="95vw"
@@ -203,19 +238,179 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/bla.html")}
+            code={require("raw!../assets/code/index.html")}
             ranges={[
-              { loc: [0, 17], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Some more advanced stuff</Text>},
-              { loc: [4, 9], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">We want a nice way to access our internal elements with an ID</Text>},
-              { loc: [18, 24], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Clean up a bit by putting the template attaching in a private method</Text>},
-              { loc: [24, 32], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Create an private method to create our cache</Text>},
-              { loc: [25, 26], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Set a familiar property to use as a map</Text>},
-              { loc: [25, 27], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Loop over all our internal elements</Text>},
-              { loc: [25, 31], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">If they have an ID, add them to our map</Text>},
-              { loc: [16, 17], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Now we can easily access stuff</Text>},
-              { loc: [0, 17], },
+              { loc: [65, 66], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">You define a phusion-routes element</Text>},
+              { loc: [66, 71], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Then you insert some page elements</Text>},
+              { loc: [72, 77], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Namespaces for nesting routes</Text>},
+              { loc: [65, 110], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">You end up with a neat app outline</Text>},
             ]}></CodeSlide>
 
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                Many projects built routers like this
+              </Heading>
+            </Slide>
+
+            <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+              <Heading size={1} fit caps lineHeight={1} textColor="white">
+                For the pages we used now deprecated element inheritance
+              </Heading>
+            </Slide>
+
+            <CodeSlide
+              maxWidth="95vw"
+              maxHeight="90vh"
+              padding="0"
+              transition={["slide"]}
+              lang="html"
+              code={require("raw!../assets/code/request.html")}
+              ranges={[
+                { loc: [1, 5], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Extend us-view and define a route</Text>},
+              ]}></CodeSlide>
+
+              <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                <Heading size={1} fit caps lineHeight={1} textColor="white">
+                  The us-view in turn extends phusion-view
+                </Heading>
+              </Slide>
+
+              <CodeSlide
+                maxWidth="95vw"
+                maxHeight="90vh"
+                padding="0"
+                transition={["slide"]}
+                lang="js"
+                code={require("raw!../assets/code/phusion-view.coffee")}
+                ranges={[
+                  { loc: [1, 8], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">The router triggers two methods</Text>},
+                  { loc: [1, 4], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">visit</Text>},
+                  { loc: [2, 3], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Resets the viewport</Text>},
+                  { loc: [3, 4], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Invokes load with show as callback</Text>},
+                  { loc: [5, 8], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">leave</Text>},
+                  { loc: [6, 7], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">calls hide</Text>},
+                  { loc: [7, 8], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">and then unload</Text>},
+                  { loc: [9, 13], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Load and unload do nothing by default</Text>},
+                  { loc: [14, 21], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Show and hide perform simple page switching</Text>},
+                ]}></CodeSlide>
+
+                <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                  <Heading size={1} fit caps lineHeight={1} textColor="white">
+                    The us-view element extends this simple base
+                  </Heading>
+                </Slide>
+
+                <CodeSlide
+                  maxWidth="95vw"
+                  maxHeight="90vh"
+                  padding="0"
+                  transition={["slide"]}
+                  lang="js"
+                  code={require("raw!../assets/code/us-view.coffee")}
+                  ranges={[
+                    { loc: [5, 9], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Keeps track of dataloaders</Text>},
+                    { loc: [11, 13], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">When the cache is not valid</Text>},
+                    { loc: [13, 15], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">It loads all the data</Text>},
+                    { loc: [22, 23], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">When the the page requires authentication</Text>},
+                    { loc: [23, 34], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">Take care of authorisation</Text>},
+                    { loc: [34, 38], note: <Text margin="0" textSize="0.8em" lineHeight="1" textColor="white">If all is ok simply invoke the show callback</Text>},
+                  ]}></CodeSlide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      The us-view element accumulated more responsibilities than we had anticipated
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Our authentication flow has just 5 branches
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Polymer 1.0 app-route examples are trivial, leaves a lot of questions.
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      API
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Decided to expose our API on a set of global variables
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Our models, resource logic and business logic all in plain JS files
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Features in our API:
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Feature: Flashing messages
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Feature: loggedin user info
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Feature: Logging in/out
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Feature: Navigation
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Feature: Flashing messages
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Feature: Requesting / cancelling metrics subscriptions
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Feature: Requesting / cancelling model subscriptions
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Simplicity & clean separation
+                    </Heading>
+                  </Slide>
+
+                  <Slide transition={["zoom"]} bgColor="black" maxWidth={1200}>
+                    <Heading size={1} fit caps lineHeight={1} textColor="white">
+                      Graphs Elements
+                    </Heading>
+                  </Slide>
         </Deck>
       </Spectacle>
     );

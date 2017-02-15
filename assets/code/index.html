@@ -1,0 +1,168 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<title>Union Station</title>
+
+		<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/android-chrome-manifest.json">
+		<meta name="msapplication-TileColor" content="#00aba9">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+
+		<link rel="stylesheet" href="styles/main.css" shim-shadowdom>
+
+		<script src="vendor/bower/webcomponentsjs/webcomponents.js"></script>
+		<link rel="import" href="us-elements.html">
+	<!-- 	<script type="text/javascript">
+			window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var n=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(n?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var o=document.getElementsByTagName("script")[0];o.parentNode.insertBefore(a,o);for(var r=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["clearEventProperties","identify","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=r(p[c])};
+heap.load("566528726");
+		</script> -->
+</head>
+<body class="not-loaded">
+	<!--[if lt IE 9]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<div id="service_notification">
+		<p class="message"></p>
+		<button class="close" onclick="App.hideServiceNotification()"></button>
+	</div>
+
+	<div class="loading-screen">
+		<div class="spinner"></div>
+	</div>
+	<div class="error-screen">
+		<div class="error-message">
+			<h1>An error occurred</h1>
+			<p>
+			Union Station is experiencing difficulties serving your request. Please check your internet connection. If your connection seems to be working for other websites, please
+			contact our support staff at <a href="support@unionstationapp.com">support@unionstationapp.com</a>, chances are we're already working on restoring your service.
+			</p>
+
+			<p class="apology">
+			Our apologies for the inconvenience!
+			</p>
+		</div>
+	</div>
+
+	<us-flash></us-flash>
+
+	<phusion-routes class="views">
+		<us-home></us-home>
+
+		<us-applications></us-applications>
+		<us-admin></us-admin>
+		<us-admin-organization></us-admin-organization>
+
+		<phusion-route-namespace namespace="/applications/:application">
+			<us-dashboard></us-dashboard>
+
+			<us-exceptions></us-exceptions>
+			<us-exception></us-exception>
+
+			<us-events></us-events>
+			<us-event></us-event>
+
+			<us-warnings></us-warnings>
+			<us-warning></us-warning>
+
+			<us-graphing></us-graphing>
+			<us-performance></us-performance>
+			<us-passenger-status></us-passenger-status>
+
+			<us-app-settings></us-app-settings>
+			<us-app-setup-instructions></us-app-setup-instructions>
+
+			<us-requests></us-requests>
+			<phusion-route-namespace namespace="/nodes/:node">
+				<us-request></us-request>
+			</phusion-route-namespace>
+		</phusion-route-namespace>
+
+		<us-new-application></us-new-application>
+
+		<us-user></us-user>
+		<us-organization></us-organization>
+		<us-product-selection></us-product-selection>
+
+		<us-login></us-login>
+		<us-confirm-email></us-confirm-email>
+		<us-sign-license></us-sign-license>
+		<us-request-password-reset></us-request-password-reset>
+		<us-password-reset></us-password-reset>
+		<us-logout></us-logout>
+	</phusion-routes>
+
+	<div hidden id="javascript-links">
+		<script src="vendor/bower/moment/min/moment.min.js"></script>
+		<script src="vendor/bower/moment-range/dist/moment-range.js"></script>
+		<script src="vendor/bower/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+
+		<script src="javascript/promise.js"></script>
+		<script src="javascript/settings.js"></script>
+		<script src="javascript/utilities.js"></script>
+
+		<script src="javascript/models/model.js"></script>
+		<script src="javascript/models/admin.js"></script>
+		<script src="javascript/models/alert.js"></script>
+		<script src="javascript/models/user.js"></script>
+		<script src="javascript/models/notification_rule.js"></script>
+		<script src="javascript/models/web_app.js"></script>
+		<script src="javascript/models/request.js"></script>
+		<script src="javascript/models/request_event.js"></script>
+		<script src="javascript/models/route.js"></script>
+		<script src="javascript/models/query.js"></script>
+		<script src="javascript/models/notification.js"></script>
+		<script src="javascript/models/exception.js"></script>
+		<script src="javascript/models/event.js"></script>
+		<script src="javascript/models/warning.js"></script>
+		<script src="javascript/models/histogram.js"></script>
+		<script src="javascript/models/summary.js"></script>
+		<script src="javascript/models/organization.js"></script>
+		<script src="javascript/models/product.js"></script>
+		<script src="javascript/models/process_data.js"></script>
+
+		<script src="vendor/bower/brow-route/dist/brow-route.js"></script>
+
+		<script src="javascript/dataProcessor.js"></script>
+		<script src="javascript/sockline.js"></script>
+		<script src="javascript/xhrline.js"></script>
+		<script src="javascript/us-api.js"></script>
+		<script src="javascript/us-graphs.js"></script>
+		<!--<script src="javascript/cache.js"></script>-->
+		<script src="javascript/routes.js"></script>
+		<script src="javascript/app.js"></script>
+
+		<script src="vendor/bower/jquery/jquery.js"></script>
+		<script src="vendor/bower/jquery-md5/jquery.md5.js"></script>
+		<script src="vendor/bower/jquery.transit/jquery.transit.js"></script>
+		<script src="vendor/bower/pikaday-time/pikaday.js"></script>
+
+		<script src="vendor/bower/d3/d3.js"></script>
+	</div>
+
+	<div id="login-helper">
+		<form action="javascript:void(0)" on-submit="javascript:void(0)">
+			<input type="text" id="email" placeholder="Username">
+			<input type="password" id="password">
+			<input type="submit" value="Sign in">
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<script src="request.js"></script>
+<polymer-element
+	name="us-request"
+	extends="us-view"
+	route="/requests/:txn_id">
+	<template>
+	<us-header></us-header>
+	<div class="small column">
+		<us-tiles-app></us-tiles-app>
+	</div>
+	<div class="column double">
+		<div class="page-header tile fluid">
+			<phusion-simple-help>
+				<h1>Request page</h1>
+				<p>
+					This page shows detailed information of a single request.
+				</p>
+
+				<p>
+					On this page below the header tile you will find an activity breakdown that shows activities that happened during the lifetime of the request. Below the 
+				</p>
+
+				<h3>Header tile</h3>
+
+				<p>
+					You can click the 'More' arrow in the bottom right corner of the header tile to reveal more information. This information includes the hostname of the node the request was made to, any URL parameters passed to the request and if the request had a non 2xx HTTP response code the request headers.
+				</p>
+
+				<p>
+					The process ID property block shows the id of the Passenger worker process that handled this request.
+				</p>
+
+				<p>
+					The status field has the HTTP status code that was returned by this request.
+				</p>
+
+				<p>
+					The 'objects' field denotes the difference between the amount of allocated Ruby objects at the start of the request and the amount at the end of the request. This number has a strong correlation with the amount of memory used by a request. Garbage collections cause inaccuracies in this metric.
+				</p>
+
+				<p>
+					The concurrency property block here shows the average amount of overlapping requests made to this route.
+				</p>
+				<p>
+					The response time block is the average of the amounts of time the matching requests spent at the server.
+				</p>
+			</phusion-simple-help>
+			<div class="title">
+				<span class="method">{{ request.method }}</span>
+				<span class="uri">
+					<template if="{{ requestClickable }}">
+					<a href="{{ fullRequestUri }}" target="_blank">{{ request.uri | formatPath }}</a>
+					</template>
+					<template if="{{ !requestClickable }}">
+					{{ request.uri | formatPath }}
+					</template>
+				</span>
+			</div>
+
+			<template if="{{ request.controller_name && request.action_name }}">
+				<div class="location">
+					<span class="controller">{{ request.controller_name }}#{{ request.action_name }}</span>
+				</div>
+			</template>
+
+			<div class="property_tabs">
+				<us-notification-calendars from="{{ timestamp }}" editable="false">
+					<span class="singletitle">Occurred at</span>
+				</us-notification-calendars>
+				<div class="process">
+					<div class="type">Process ID</div>
+					<div class="value">{{ request.app_pid }}</div>
+				</div>
+				<div class="objects">
+					<div class="type">Objects allocated</div>
+					<div class="value">{{ request.allocated_objects | formatBigNum | formatMemory }}</div>
+				</div>
+				<div class="status" title="{{ request.status }}">
+					<div class="type">Status</div>
+					<div class="value">{{ request.status | statusCode }}<span class="order">{{ request.status | statusText }}</span></div>
+				</div>
+				<div class="response_time">
+					<div class="type">Response time</div>
+					<div class="value"> {{ request.response_time }}<span class="order">ms</span></div>
+				</div>
+				<div>
+					<div class="show-more button type" on-click="{{ toggleMore }}">
+						<template if="{{ !moreShown }}">
+							More<div class="icon value more"></div>
+						</template>
+						<template if="{{ moreShown }}">
+							Less<div class="icon value less"></div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<template if="{{ moreShown }}">
+			<div class="more-information tile fluid" id="moreInfo">
+				<div class="title big">Node</div>
+				<table class="pretty">
+					<thead>
+						<th class="key">Key</th>
+						<th class="value">Value</th>
+					</thead>
+					<tr>
+						<td>Name</td>
+						<td class="value">{{ request.node_info.name }}</td>
+					</tr>
+					<tr>
+						<td>Hostname</td>
+						<td class="value">{{ request.node_info.host_name }}</td>
+					</tr>
+				</table>
+
+				<div class="title big">URI Parameters</div>
+				<table class="pretty">
+					<thead>
+						<th class="key">Key</th>
+						<th class="value">Value</th>
+					</thead>
+					<template if="{{ hasParams }}">
+						<template repeat="{{ key in keys(request.parameters) }}">
+							<tr>
+								<td>{{ key }}</td>
+								<td class="value">{{ request.parameters[key] }}</td>
+							</tr>
+						</template>
+					</template>
+					<template if="{{ !hasParams }}">
+						<tr>
+							<td colspan="2">No parameters for this request</td>
+						</tr>
+					</template>
+				</table>
+				<div class="title big">Request Headers</div>
+				<table class="pretty">
+					<thead>
+						<th class="key">Key</th>
+						<th class="value">Value</th>
+					</thead>
+					<template if="{{ hasHeaders }}">
+						<template repeat="{{ key in keys(request.headers) }}">
+							<tr>
+								<td>{{ key }}</td>
+								<td class="value">{{ request.headers[key] }}</td>
+							</tr>
+						</template>
+					</template>
+					<template if="{{ !hasHeaders }}">
+						<tr>
+							<td colspan="2">No headers logged for this request</td>
+						</tr>
+					</template>
+				</table>
+			</div>
+		</template>
+
+		<div class="breakdown tile fluid">
+			<phusion-simple-help invert>
+				<h1>Request activity breakdown</h1>
+				<p>
+					These are the activities Union Station tracked during the request.
+				</p>
+
+				<h3>Request Processing</h3>
+				<p>
+					Time spent from the moment Passenger receives the first request byte until the last response byte has been sent to the client.
+				</p>
+
+				<h3>Await available process</h3>
+				<p>
+					Time spent selecting a process that is available to handle the request. Even if a process is readily available to handle the request, selecting the first available process still takes some time (in the order of microseconds), so this activity will always show up. This does not necessarily mean the request is 'waiting'.
+				</p>
+
+				<h3>Request Proxying</h3>
+				<p>
+					The time spent transmitting the request to the handling process, and time receiving the request response and relaying it back to passenger.
+				</p>
+
+				<h3>App request handler processing</h3>
+				<p>
+					The time spent within Rack.
+				</p>
+
+				<h3>Framework request processing</h3>
+				<p>
+					The time spent within the Rails (or other rack-compatible) framework.
+				</p>
+			</phusion-simple-help>
+			<div class="title">
+				<span class="icon"></span>
+				<span class="text">Activity Breakdown</span>
+			</div>
+
+			<div class="graph">
+				<div class="image">
+					<template repeat="{{ layer in request.eventLayers }}">
+					<div class="layer">
+						<template repeat="{{ item in layer }}">
+						<span class="clickable block" id="graph_{{ item.event.id }}" data-id="{{ item.event.id }}"
+							style="width: {{ item.event | eventWidth }}%;	margin-left: {{ item.event | eventMargin }}%;"
+							on-click="{{ onClick }}">{{ item.event | formatEvent }}</span>
+						</template>
+					</div>
+					</template>
+					<div class="grid">
+						<template repeat="{{ duration_intervals }}">
+						<span class="line"></span>
+						</template>
+					</div>
+				</div>
+				<div class="timestamps">
+					<template repeat="{{ timestamp in duration_intervals }}">
+					<span class="timestamp">{{ timestamp.seconds }}<span class="milliseconds">.{{ timestamp.milliseconds }}</span></span>
+					</template>
+				</div>
+			</div>
+
+			<table class="pretty">
+				<thead>
+					<th class="time clickable" on-click="{{ sortByTime }}">Time</th>
+					<th class="activity clickable" on-click="{{ sortByActivity }}">Activity</th>
+					<th class="duration clickable" on-click="{{ sortByDuration }}">Execution Time</th>
+					<th>Duration</th>
+				</thead>
+				<template repeat="{{ event in request.events }}">
+				<tr class="clickable" id="table_{{ event.id }}" data-id="{{ event.id }}" on-click="{{ onClick }}">
+					<td class="time">{{ event.begin_timestamp | formatPreciseTimestamp }}</td>
+					<template if="{{ event.benchmark_type == 'database' }}">
+						<td class="database activity">
+							{{ event.sql | formatSQL }}
+							<div class="tooltip">
+								<div class="copy-spacer"></div>
+								<button class="copy-button" on-click="{{copyEventTooltip}}">Copy</button>
+    							<div style="white-space: pre-line;">{{ getTooltip(event) }}</div>
+							</div>
+						</td>
+					</template>
+					<template if="{{ event.benchmark_type != 'database' }}">
+						<template if="{{ hasTooltipData(event) }}">
+							<td class="activity">
+								{{ event | getEventName }}
+								<div class="tooltip">
+									<div class="copy-spacer"></div>
+									<button class="copy-button" on-click="{{copyEventTooltip}}">Copy</button>
+    								<div style="white-space: pre-line;">{{ getTooltip(event) }}</div>
+								</div>
+							</td>
+						</template>
+						<template if="{{ !hasTooltipData(event) }}">
+							<td class="activity">{{ event | getEventName }}</td>
+						</template>
+					</template>
+					<td class="duration">{{ event.body_duration / 1000 }}ms</span>
+					<td class="block"><span style="width: {{ event | eventWidth }}%;"></span></td>
+				</tr>
+				</template>
+			</table>
+		</div>
+	</div>
+	</template>
+</polymer-element>
